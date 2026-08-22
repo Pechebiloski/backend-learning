@@ -1,9 +1,19 @@
-import express from 'express'
+import express, { request, response } from 'express'
 
 const app = express()
 
+app.use(express.json())
+
+const users = []
+
+app.post('/users', (request, response) => {
+   users.push(request.body)
+
+     response.status(201).json(request.body)
+})
+
 app.get('/users', (request, response) => {
-    response.send('ok, deu bom')
+    response.status(200).json(users)
 } )
 
 app.listen(3000)
