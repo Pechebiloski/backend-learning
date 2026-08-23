@@ -6,15 +6,47 @@ const app = express()
 
 app.use(express.json())
 
-const users = []
 
-app.post('/users', (request, response) => {
-   users.push(request.body)
-
+app.post('/users', async (request, response) => {
+  await prisma.user.create({
+  data: {
+     email: request.body.email,
+     name: request.body.name,
+     age: request.body.age
+  }
+  })
      response.status(201).json(request.body)
 })
 
-app.get('/users', (request, response) => {
+app.put('/users/:id', async (request, response) => {
+  //console.log(request) -> ver como o express
+  //monta o objeto da requisição.
+  await prisma.user.update({
+       where:{
+       id: request.params.id
+     },
+    data:{
+       email: request.body.email,
+       name: request.body.name,
+       age: request.body.age
+    }
+   })
+     response.status(201).json(request.body)
+  })
+
+  app.delete('/users/:id', async (request, response) => {
+  await prisma.user.delete({
+   where: {
+    id: request.params.id
+   }
+  })
+     response.status(200).json({ message: 'User deletado com sucesso!'})
+})
+
+
+app.get('/users', async (request, response) => {
+     const users = await prisma.user.findMany()
+
     response.status(200).json(users)
 } )
 
