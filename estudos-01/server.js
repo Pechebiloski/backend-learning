@@ -1,4 +1,4 @@
-import express, { request, response } from 'express'
+import express from 'express'
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
@@ -45,10 +45,22 @@ app.put('/users/:id', async (request, response) => {
 
 
 app.get('/users', async (request, response) => {
-     const users = await prisma.user.findMany()
+    let users = []
+
+    if (request.query.name) {
+        users = await prisma.user.findMany({
+            where: {
+                name: request.query.name,
+                email: request.query.email,
+                age: request.query.age
+            }
+        })
+    } else {
+        users = await prisma.user.findMany()
+    }
 
     response.status(200).json(users)
-} )
+})
 
 app.listen(3000)
 
