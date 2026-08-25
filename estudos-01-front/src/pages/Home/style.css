@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 100vh;
+  background: linear-gradient(180deg, #a1deac 0%, rgba(66, 183, 97, 0.8) 100%);
+}
