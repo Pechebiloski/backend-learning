@@ -10,7 +10,3 @@ body {
   width: 100vh;
   background: linear-gradient(180deg, #a1deac 0%, rgba(66, 183, 97, 0.8) 100%);
 }
-
-h1 {
-  text-align: center;
-}
