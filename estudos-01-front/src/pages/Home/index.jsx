@@ -20,7 +20,7 @@ function Home() {
   
   setUsers(usersFromApi.data)
  // para ver a lista de usuarios vinda do backend na aba Console do DevTools
-  console.log(users)
+ // console.log(users)
  }  
   async function createUsers(){
    await api.post('/users', {
@@ -30,6 +30,11 @@ function Home() {
    })
      getUsers()
  }  
+  async function deleteUsers(id){
+   await api.delete(`/users/${id}`) 
+ }  
+
+
 
   useEffect(() => {
     getUsers()
@@ -57,7 +62,7 @@ function Home() {
           <p>Idade: <span>{user.age}</span></p>
           <p>Email: <span>{user.email}</span></p>
          </div>
-         <button className="delete-btn">
+         <button onClick={() => deleteUsers(user.id)} className="delete-btn">
           <img src={Trash} alt="Trash for delete" />
          </button>
       </div>
