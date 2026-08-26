@@ -12,8 +12,17 @@ function Home() {
  let users = []
  
  async function getUsers(){
-  users = await api.get('/users')
+ const usersFromApi = await api.get('/users')
+  
+ users = usersFromApi.data
+ 
+ // para ver a lista de usuarios vinda do backend na aba Console do DevTools
+  console.log(users)
  }  
+  useEffect(() => {
+    getUsers()
+    }, []);
+
  
 
   return (

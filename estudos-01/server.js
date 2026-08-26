@@ -1,11 +1,13 @@
 import express from 'express'
+import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
+
 const prisma = new PrismaClient()
 
 const app = express()
 
 app.use(express.json())
-
+app.use(cors())
 
 app.post('/users', async (request, response) => {
   await prisma.user.create({
