@@ -14,7 +14,6 @@ function Home() {
  async function getUsers(){
   users = await api.get('/users')
  }  
-
  
 
   return (
