@@ -6,18 +6,17 @@ import Trash from '../../assets/trash.svg'
 //a importaçao mo começo
 //e usar {} no src 
 import api from '../../services/api';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Home() {
- let users = []
+ const [users, setUsers] = useState ([])
  
  async function getUsers(){
  const usersFromApi = await api.get('/users')
   
- users = usersFromApi.data
- 
+  setUsers(usersFromApi.data)
  // para ver a lista de usuarios vinda do backend na aba Console do DevTools
-  console.log(users)
+ // console.log(users)
  }  
   useEffect(() => {
     getUsers()
