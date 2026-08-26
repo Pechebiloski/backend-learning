@@ -32,6 +32,7 @@ function Home() {
  }  
   async function deleteUsers(id){
    await api.delete(`/users/${id}`) 
+   getUsers()
  }  
 
 
