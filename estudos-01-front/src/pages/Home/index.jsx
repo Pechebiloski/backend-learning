@@ -6,18 +6,31 @@ import Trash from '../../assets/trash.svg'
 //a importaçao mo começo
 //e usar {} no src 
 import api from '../../services/api';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function Home() {
  const [users, setUsers] = useState ([])
  
+ const inputName = useRef()
+ const inputAge = useRef()
+ const inputEmail = useRef()
+
  async function getUsers(){
  const usersFromApi = await api.get('/users')
   
   setUsers(usersFromApi.data)
  // para ver a lista de usuarios vinda do backend na aba Console do DevTools
- // console.log(users)
+  console.log(users)
  }  
+  async function createUsers(){
+   await api.post('/users', {
+    name: inputName.current.value,
+    age: Number(inputAge.current.value),
+    email: inputEmail.current.value
+   })
+     getUsers()
+ }  
+
   useEffect(() => {
     getUsers()
     }, []);
@@ -28,11 +41,11 @@ function Home() {
     <div className="container">
       <form>
         <h1>Cadastro de usuarios</h1>
-       <input placeholder="Nome" name="nome" type="text" />
-       <input placeholder="Idade" name="idade" type="number" />
-       <input placeholder="Email" name="email" type="email" />
+       <input placeholder="Nome" name="nome" type="text" ref={inputName}/>
+       <input placeholder="Idade" name="idade" type="number" ref={inputAge}/>
+       <input placeholder="Email" name="email" type="email" ref={inputEmail}/>
 
-       <button type="button">Cadastrar</button>
+       <button type="button" onClick={createUsers}>Cadastrar</button>
       </form>
 
 
