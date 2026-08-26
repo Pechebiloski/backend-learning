@@ -6,13 +6,16 @@ import Trash from '../../assets/trash.svg'
 //a importaçao mo começo
 //e usar {} no src 
 import api from '../../services/api';
+import { useEffect } from "react";
 
 function Home() {
  let users = []
  
  async function getUsers(){
   users = await api.get('/users')
- }
+ }  
+
+ 
 
   return (
     <div className="container">
